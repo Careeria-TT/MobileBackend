@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MobileBackend.ViewModels.HoursPerWorkAssignmentModel>
+
+@{
+    ViewBag.Title = "HoursPerWorkAssignment";
+}
+
+<h2>Hours Per Work Assignment</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkAssignmentId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkAssignmentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalHours)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkAssignmentId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkAssignmentName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalHours)
+        </td>
+    </tr>
+}
+
+</table>
+
+<p>Total entries: @Model.Count().</p>

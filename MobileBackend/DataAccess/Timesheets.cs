@@ -12,28 +12,25 @@ namespace MobileBackend.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Employee
+    public partial class Timesheets
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employee()
-        {
-            this.Timesheets = new HashSet<Timesheet>();
-        }
-    
-        public int Id_Employee { get; set; }
+        public int Id_Timesheet { get; set; }
+        public Nullable<int> Id_Customer { get; set; }
         public Nullable<int> Id_Contractor { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string PhoneNumber { get; set; }
-        public string EmailAddress { get; set; }
-        public string EmployeeReferences { get; set; }
+        public Nullable<int> Id_Employee { get; set; }
+        public Nullable<int> Id_WorkAssignment { get; set; }
+        public Nullable<System.DateTime> StartTime { get; set; }
+        public Nullable<System.DateTime> StopTime { get; set; }
+        public string Comments { get; set; }
+        public Nullable<bool> WorkComplete { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> LastModifiedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
         public Nullable<bool> Active { get; set; }
     
-        public virtual Contractor Contractor { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Timesheet> Timesheets { get; set; }
+        public virtual Contractors Contractors { get; set; }
+        public virtual Customers Customers { get; set; }
+        public virtual Employees Employees { get; set; }
+        public virtual WorkAssignments WorkAssignments { get; set; }
     }
 }

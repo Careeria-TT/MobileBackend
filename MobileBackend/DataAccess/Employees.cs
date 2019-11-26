@@ -12,30 +12,28 @@ namespace MobileBackend.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class WorkAssignment
+    public partial class Employees
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public WorkAssignment()
+        public Employees()
         {
-            this.Timesheets = new HashSet<Timesheet>();
+            this.Timesheets = new HashSet<Timesheets>();
         }
     
-        public int Id_WorkAssignment { get; set; }
-        public Nullable<int> Id_Customer { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public Nullable<System.DateTime> Deadline { get; set; }
-        public Nullable<bool> InProgress { get; set; }
-        public Nullable<System.DateTime> InProgressAt { get; set; }
-        public Nullable<bool> Completed { get; set; }
-        public Nullable<System.DateTime> CompletedAt { get; set; }
+        public int Id_Employee { get; set; }
+        public Nullable<int> Id_Contractor { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string PhoneNumber { get; set; }
+        public string EmailAddress { get; set; }
+        public string EmployeeReferences { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> LastModifiedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
         public Nullable<bool> Active { get; set; }
     
-        public virtual Customer Customer { get; set; }
+        public virtual Contractors Contractors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Timesheet> Timesheets { get; set; }
+        public virtual ICollection<Timesheets> Timesheets { get; set; }
     }
 }

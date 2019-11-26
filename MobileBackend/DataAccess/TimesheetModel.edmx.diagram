@@ -4,18 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="106b0980c1a44d3dadc61537887a2dba" Name="Diagram1" ZoomLevel="88">
-        <EntityTypeShape EntityType="CareeriaMobileDBModel.Contractor" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CareeriaMobileDBModel.Customer" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CareeriaMobileDBModel.Employee" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CareeriaMobileDBModel.Timesheet" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="CareeriaMobileDBModel.WorkAssignment" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
-        <AssociationConnector Association="CareeriaMobileDBModel.FK_Employees_Contractors" ManuallyRouted="false" />
-        <AssociationConnector Association="CareeriaMobileDBModel.FK_Timesheets_Contractors" ManuallyRouted="false" />
-        <AssociationConnector Association="CareeriaMobileDBModel.FK_Timesheets_Customer" ManuallyRouted="false" />
-        <AssociationConnector Association="CareeriaMobileDBModel.FK_WorkAssignments_Customers" ManuallyRouted="false" />
-        <AssociationConnector Association="CareeriaMobileDBModel.FK_Timesheets_Employees" ManuallyRouted="false" />
-        <AssociationConnector Association="CareeriaMobileDBModel.FK_Timesheets_WorkAssignments" ManuallyRouted="false" />
+      <Diagram DiagramId="a52c6627b7b5494da8f418eaa121e5ca" Name="Diagram1">
+        <EntityTypeShape EntityType="TimesheetMobileModel.Contractors" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimesheetMobileModel.Customers" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimesheetMobileModel.Employees" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimesheetMobileModel.Timesheets" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimesheetMobileModel.WorkAssignments" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <AssociationConnector Association="TimesheetMobileModel.FK_Employees_Contractors" ManuallyRouted="false" />
+        <AssociationConnector Association="TimesheetMobileModel.FK_Timesheets_Contractors" ManuallyRouted="false" />
+        <AssociationConnector Association="TimesheetMobileModel.FK_Timesheets_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="TimesheetMobileModel.FK_WorkAssignments_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="TimesheetMobileModel.FK_Timesheets_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="TimesheetMobileModel.FK_Timesheets_WorkAssignments" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -14,7 +14,7 @@ namespace MobileBackend.Controllers
         public string[] GetAll()
         {
             string[] assignmentNames = null;
-            CareeriaMobileDBEntities entities = new CareeriaMobileDBEntities();
+            TimesheetEntities entities = new TimesheetEntities();
             try
             {
                 assignmentNames = (from wa in entities.WorkAssignments
@@ -32,10 +32,10 @@ namespace MobileBackend.Controllers
         public bool PostStatus(WorkAssignmentOperationModel input)
         {
 
-            CareeriaMobileDBEntities entities = new CareeriaMobileDBEntities();
+            TimesheetEntities entities = new TimesheetEntities();
             try
             {
-                WorkAssignment assignment = (from wa in entities.WorkAssignments
+                WorkAssignments assignment = (from wa in entities.WorkAssignments
                                    where (wa.Active == true) &&
                                    (wa.Title == input.AssignmentTitle)
                                    select wa).FirstOrDefault();
@@ -47,7 +47,7 @@ namespace MobileBackend.Controllers
 
                 if (input.Operation == "Start") { 
                 int assignmentId = assignment.Id_WorkAssignment;
-                Timesheet newEntry = new Timesheet()
+                Timesheets newEntry = new Timesheets()
                 {
                     Id_WorkAssignment = assignmentId,
                     StartTime = DateTime.Now,
@@ -60,9 +60,10 @@ namespace MobileBackend.Controllers
                 else if (input.Operation == "Stop")
                 {
                     int assignmentId = assignment.Id_WorkAssignment;
-                    Timesheet existing = (from ts in entities.Timesheets
+                    Timesheets existing = (from ts in entities.Timesheets
                                           where (ts.Id_WorkAssignment == assignmentId) &&
-                                          (ts.Active == true)
+                                          (ts.Active == true) && (ts.WorkComplete == false)
+                                          orderby ts.StartTime descending
                                           select ts).FirstOrDefault();
 
                     if (existing != null)

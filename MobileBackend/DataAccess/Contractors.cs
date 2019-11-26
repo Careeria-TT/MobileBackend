@@ -12,13 +12,13 @@ namespace MobileBackend.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Contractor
+    public partial class Contractors
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Contractor()
+        public Contractors()
         {
-            this.Employees = new HashSet<Employee>();
-            this.Timesheets = new HashSet<Timesheet>();
+            this.Employees = new HashSet<Employees>();
+            this.Timesheets = new HashSet<Timesheets>();
         }
     
         public int Id_Contractor { get; set; }
@@ -34,8 +34,8 @@ namespace MobileBackend.DataAccess
         public Nullable<bool> Active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employee> Employees { get; set; }
+        public virtual ICollection<Employees> Employees { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Timesheet> Timesheets { get; set; }
+        public virtual ICollection<Timesheets> Timesheets { get; set; }
     }
 }

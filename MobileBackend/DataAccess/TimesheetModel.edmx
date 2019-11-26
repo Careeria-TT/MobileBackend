@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CareeriaMobileDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TimesheetMobileModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Contractors">
           <Key>
             <PropertyRef Name="Id_Contractor" />
@@ -159,7 +159,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CareeriaMobileDBModelStoreContainer">
+        <EntityContainer Name="TimesheetMobileModelStoreContainer">
           <EntitySet Name="Contractors" EntityType="Self.Contractors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
@@ -190,11 +190,12 @@
             <End Role="WorkAssignments" EntitySet="WorkAssignments" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="CareeriaMobileDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Contractor">
+      <Schema Namespace="TimesheetMobileModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Contractors">
           <Key>
             <PropertyRef Name="Id_Contractor" />
           </Key>
@@ -212,7 +213,7 @@
           <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Contractors" FromRole="Contractors" ToRole="Employees" />
           <NavigationProperty Name="Timesheets" Relationship="Self.FK_Timesheets_Contractors" FromRole="Contractors" ToRole="Timesheets" />
         </EntityType>
-        <EntityType Name="Customer">
+        <EntityType Name="Customers">
           <Key>
             <PropertyRef Name="Id_Customer" />
           </Key>
@@ -228,7 +229,7 @@
           <NavigationProperty Name="Timesheets" Relationship="Self.FK_Timesheets_Customer" FromRole="Customers" ToRole="Timesheets" />
           <NavigationProperty Name="WorkAssignments" Relationship="Self.FK_WorkAssignments_Customers" FromRole="Customers" ToRole="WorkAssignments" />
         </EntityType>
-        <EntityType Name="Employee">
+        <EntityType Name="Employees">
           <Key>
             <PropertyRef Name="Id_Employee" />
           </Key>
@@ -243,10 +244,10 @@
           <Property Name="LastModifiedAt" Type="DateTime" Precision="3" />
           <Property Name="DeletedAt" Type="DateTime" Precision="3" />
           <Property Name="Active" Type="Boolean" />
-          <NavigationProperty Name="Contractor" Relationship="Self.FK_Employees_Contractors" FromRole="Employees" ToRole="Contractors" />
+          <NavigationProperty Name="Contractors" Relationship="Self.FK_Employees_Contractors" FromRole="Employees" ToRole="Contractors" />
           <NavigationProperty Name="Timesheets" Relationship="Self.FK_Timesheets_Employees" FromRole="Employees" ToRole="Timesheets" />
         </EntityType>
-        <EntityType Name="Timesheet">
+        <EntityType Name="Timesheets">
           <Key>
             <PropertyRef Name="Id_Timesheet" />
           </Key>
@@ -263,12 +264,12 @@
           <Property Name="LastModifiedAt" Type="DateTime" Precision="3" />
           <Property Name="DeletedAt" Type="DateTime" Precision="3" />
           <Property Name="Active" Type="Boolean" />
-          <NavigationProperty Name="Contractor" Relationship="Self.FK_Timesheets_Contractors" FromRole="Timesheets" ToRole="Contractors" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_Timesheets_Customer" FromRole="Timesheets" ToRole="Customers" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Timesheets_Employees" FromRole="Timesheets" ToRole="Employees" />
-          <NavigationProperty Name="WorkAssignment" Relationship="Self.FK_Timesheets_WorkAssignments" FromRole="Timesheets" ToRole="WorkAssignments" />
+          <NavigationProperty Name="Contractors" Relationship="Self.FK_Timesheets_Contractors" FromRole="Timesheets" ToRole="Contractors" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Timesheets_Customer" FromRole="Timesheets" ToRole="Customers" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Timesheets_Employees" FromRole="Timesheets" ToRole="Employees" />
+          <NavigationProperty Name="WorkAssignments" Relationship="Self.FK_Timesheets_WorkAssignments" FromRole="Timesheets" ToRole="WorkAssignments" />
         </EntityType>
-        <EntityType Name="WorkAssignment">
+        <EntityType Name="WorkAssignments">
           <Key>
             <PropertyRef Name="Id_WorkAssignment" />
           </Key>
@@ -285,12 +286,12 @@
           <Property Name="LastModifiedAt" Type="DateTime" Precision="3" />
           <Property Name="DeletedAt" Type="DateTime" Precision="3" />
           <Property Name="Active" Type="Boolean" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_WorkAssignments_Customers" FromRole="WorkAssignments" ToRole="Customers" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_WorkAssignments_Customers" FromRole="WorkAssignments" ToRole="Customers" />
           <NavigationProperty Name="Timesheets" Relationship="Self.FK_Timesheets_WorkAssignments" FromRole="WorkAssignments" ToRole="Timesheets" />
         </EntityType>
         <Association Name="FK_Employees_Contractors">
-          <End Role="Contractors" Type="Self.Contractor" Multiplicity="0..1" />
-          <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Contractors">
               <PropertyRef Name="Id_Contractor" />
@@ -301,8 +302,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Timesheets_Contractors">
-          <End Role="Contractors" Type="Self.Contractor" Multiplicity="0..1" />
-          <End Role="Timesheets" Type="Self.Timesheet" Multiplicity="*" />
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="0..1" />
+          <End Role="Timesheets" Type="Self.Timesheets" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Contractors">
               <PropertyRef Name="Id_Contractor" />
@@ -313,8 +314,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Timesheets_Customer">
-          <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="Timesheets" Type="Self.Timesheet" Multiplicity="*" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Timesheets" Type="Self.Timesheets" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customers">
               <PropertyRef Name="Id_Customer" />
@@ -325,8 +326,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_WorkAssignments_Customers">
-          <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="WorkAssignments" Type="Self.WorkAssignment" Multiplicity="*" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="WorkAssignments" Type="Self.WorkAssignments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customers">
               <PropertyRef Name="Id_Customer" />
@@ -337,8 +338,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Timesheets_Employees">
-          <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
-          <End Role="Timesheets" Type="Self.Timesheet" Multiplicity="*" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Timesheets" Type="Self.Timesheets" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
               <PropertyRef Name="Id_Employee" />
@@ -349,8 +350,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Timesheets_WorkAssignments">
-          <End Role="WorkAssignments" Type="Self.WorkAssignment" Multiplicity="0..1" />
-          <End Role="Timesheets" Type="Self.Timesheet" Multiplicity="*" />
+          <End Role="WorkAssignments" Type="Self.WorkAssignments" Multiplicity="0..1" />
+          <End Role="Timesheets" Type="Self.Timesheets" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="WorkAssignments">
               <PropertyRef Name="Id_WorkAssignment" />
@@ -360,12 +361,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CareeriaMobileDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Contractors" EntityType="Self.Contractor" />
-          <EntitySet Name="Customers" EntityType="Self.Customer" />
-          <EntitySet Name="Employees" EntityType="Self.Employee" />
-          <EntitySet Name="Timesheets" EntityType="Self.Timesheet" />
-          <EntitySet Name="WorkAssignments" EntityType="Self.WorkAssignment" />
+        <EntityContainer Name="TimesheetEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Contractors" EntityType="Self.Contractors" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="Timesheets" EntityType="Self.Timesheets" />
+          <EntitySet Name="WorkAssignments" EntityType="Self.WorkAssignments" />
           <AssociationSet Name="FK_Employees_Contractors" Association="Self.FK_Employees_Contractors">
             <End Role="Contractors" EntitySet="Contractors" />
             <End Role="Employees" EntitySet="Employees" />
@@ -396,9 +397,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CareeriaMobileDBModelStoreContainer" CdmEntityContainer="CareeriaMobileDBEntities">
+        <EntityContainerMapping StorageEntityContainer="TimesheetMobileModelStoreContainer" CdmEntityContainer="TimesheetEntities">
           <EntitySetMapping Name="Contractors">
-            <EntityTypeMapping TypeName="CareeriaMobileDBModel.Contractor">
+            <EntityTypeMapping TypeName="TimesheetMobileModel.Contractors">
               <MappingFragment StoreEntitySet="Contractors">
                 <ScalarProperty Name="Id_Contractor" ColumnName="Id_Contractor" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
@@ -415,7 +416,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="CareeriaMobileDBModel.Customer">
+            <EntityTypeMapping TypeName="TimesheetMobileModel.Customers">
               <MappingFragment StoreEntitySet="Customers">
                 <ScalarProperty Name="Id_Customer" ColumnName="Id_Customer" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
@@ -430,7 +431,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="CareeriaMobileDBModel.Employee">
+            <EntityTypeMapping TypeName="TimesheetMobileModel.Employees">
               <MappingFragment StoreEntitySet="Employees">
                 <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
                 <ScalarProperty Name="Id_Contractor" ColumnName="Id_Contractor" />
@@ -447,7 +448,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Timesheets">
-            <EntityTypeMapping TypeName="CareeriaMobileDBModel.Timesheet">
+            <EntityTypeMapping TypeName="TimesheetMobileModel.Timesheets">
               <MappingFragment StoreEntitySet="Timesheets">
                 <ScalarProperty Name="Id_Timesheet" ColumnName="Id_Timesheet" />
                 <ScalarProperty Name="Id_Customer" ColumnName="Id_Customer" />
@@ -466,7 +467,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WorkAssignments">
-            <EntityTypeMapping TypeName="CareeriaMobileDBModel.WorkAssignment">
+            <EntityTypeMapping TypeName="TimesheetMobileModel.WorkAssignments">
               <MappingFragment StoreEntitySet="WorkAssignments">
                 <ScalarProperty Name="Id_WorkAssignment" ColumnName="Id_WorkAssignment" />
                 <ScalarProperty Name="Id_Customer" ColumnName="Id_Customer" />
@@ -498,7 +499,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

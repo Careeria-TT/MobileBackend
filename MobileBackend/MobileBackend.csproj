@@ -59,7 +59,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -143,41 +143,43 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\WorkAssignmentController.cs" />
-    <Compile Include="DataAccess\Contractor.cs">
-      <DependentUpon>TimesheetModel.tt</DependentUpon>
+    <Compile Include="DataAccess\Contractors.cs">
+      <DependentUpon>TimeSheetModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\Customer.cs">
-      <DependentUpon>TimesheetModel.tt</DependentUpon>
+    <Compile Include="DataAccess\Customers.cs">
+      <DependentUpon>TimeSheetModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\Employee.cs">
-      <DependentUpon>TimesheetModel.tt</DependentUpon>
+    <Compile Include="DataAccess\Employees.cs">
+      <DependentUpon>TimeSheetModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\Timesheet.cs">
-      <DependentUpon>TimesheetModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataAccess\TimesheetModel.Context.cs">
+    <Compile Include="DataAccess\TimeSheetModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TimesheetModel.Context.tt</DependentUpon>
+      <DependentUpon>TimeSheetModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\TimesheetModel.cs">
+    <Compile Include="DataAccess\TimeSheetModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TimesheetModel.tt</DependentUpon>
+      <DependentUpon>TimeSheetModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\TimesheetModel.Designer.cs">
+    <Compile Include="DataAccess\TimeSheetModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TimesheetModel.edmx</DependentUpon>
+      <DependentUpon>TimeSheetModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\WorkAssignment.cs">
-      <DependentUpon>TimesheetModel.tt</DependentUpon>
+    <Compile Include="DataAccess\Timesheets.cs">
+      <DependentUpon>TimeSheetModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\WorkAssignments.cs">
+      <DependentUpon>TimeSheetModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\HoursPerWorkAssignmentModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -186,26 +188,19 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="DataAccess\TimesheetModel.Context.tt">
+    <Content Include="DataAccess\TimeSheetModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TimesheetModel.Context.cs</LastGenOutput>
-      <DependentUpon>TimesheetModel.edmx</DependentUpon>
+      <DependentUpon>TimeSheetModel.edmx</DependentUpon>
+      <LastGenOutput>TimeSheetModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DataAccess\TimesheetModel.tt">
+    <Content Include="DataAccess\TimeSheetModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TimesheetModel.edmx</DependentUpon>
-      <LastGenOutput>TimesheetModel.cs</LastGenOutput>
+      <DependentUpon>TimeSheetModel.edmx</DependentUpon>
+      <LastGenOutput>TimeSheetModel.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <EntityDeploy Include="DataAccess\TimesheetModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TimesheetModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="DataAccess\TimesheetModel.edmx.diagram">
-      <DependentUpon>TimesheetModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -228,6 +223,13 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <EntityDeploy Include="DataAccess\TimeSheetModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TimeSheetModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DataAccess\TimeSheetModel.edmx.diagram">
+      <DependentUpon>TimeSheetModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -270,9 +272,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Reports\HoursPerWorkAssignment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

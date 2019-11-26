@@ -13,10 +13,10 @@ namespace MobileBackend.DataAccess
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CareeriaMobileDBEntities : DbContext
+    public partial class TimesheetEntities : DbContext
     {
-        public CareeriaMobileDBEntities()
-            : base("name=CareeriaMobileDBEntities")
+        public TimesheetEntities()
+            : base("name=TimesheetEntities")
         {
         }
     
@@ -25,10 +25,10 @@ namespace MobileBackend.DataAccess
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Contractor> Contractors { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Timesheet> Timesheets { get; set; }
-        public virtual DbSet<WorkAssignment> WorkAssignments { get; set; }
+        public virtual DbSet<Contractors> Contractors { get; set; }
+        public virtual DbSet<Customers> Customers { get; set; }
+        public virtual DbSet<Employees> Employees { get; set; }
+        public virtual DbSet<Timesheets> Timesheets { get; set; }
+        public virtual DbSet<WorkAssignments> WorkAssignments { get; set; }
     }
 }

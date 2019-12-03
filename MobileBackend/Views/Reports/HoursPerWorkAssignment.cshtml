@@ -3,7 +3,77 @@
 @{
     ViewBag.Title = "HoursPerWorkAssignment";
 }
+@section scripts {
+    <script src="~/Scripts/Chart.js"></script>
+    <script>
+        var myChart = null;
+        var chartOptions = {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
 
+        function alustaGraafi() {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ["AA", "BB"],
+                    datasets: [{
+                        label: 'Lukumäärä',
+                        data: [],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: chartOptions
+            });
+        }
+
+        function lataaDataPalvelimelta(url) {
+            $.get(url, function (data) {
+                myChart.config.data.datasets[0].data = Data.Counts;
+                myChart.config.data.labels = Data.Labels;
+                myChart.update();
+            });
+        }
+
+        $(function () {
+            //Sivun alustus
+            alustaGraafi();
+            lataaDataPalvelimelta("/reports/GetTimesheetCounts");
+
+            $("showOnlyCompletedRecords").change(function (){
+                var selected = $("showOnlyCompletedRecords").is(":checked");
+
+                var url = "/reports/GetTimesheetCounts";
+                if (selected) {
+                    url += "?onlyComplete=1"
+                }
+                lataaDataPalvelimelta(url);
+                })
+        });
+    </script>
+}
 <h2>Hours Per Work Assignment</h2>
 
 
@@ -20,20 +90,33 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.WorkAssignmentId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WorkAssignmentName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalHours)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkAssignmentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkAssignmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalHours)
+            </td>
+        </tr>
+    }
 
 </table>
 
 <p>Total entries: @Model.Count().</p>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<a hred="/Reports/HoursPerWorkAssignmentAsExcel" class="btn btn-primary">Export To Excel</a>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<input id="showOnlyCompletedRecords" type="checkbox" /> show Only Completed Records
+<canvas id="myChart" width="400" height="200"></canvas>

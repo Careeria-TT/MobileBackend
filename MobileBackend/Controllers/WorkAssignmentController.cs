@@ -56,6 +56,11 @@ namespace MobileBackend.Controllers
                     CreatedAt = DateTime.Now
                 };
                 entities.Timesheets.Add(newEntry);
+
+                    //Päivitetään samalla work-assignmentin tilatietoja
+                    assignment.InProgress = true;
+                    assignment.InProgressAt = DateTime.Now;
+                    assignment.LastModifiedAt = DateTime.Now;
                 }
                 else if (input.Operation == "Stop")
                 {
@@ -71,6 +76,12 @@ namespace MobileBackend.Controllers
                         existing.StopTime = DateTime.Now;
                         existing.WorkComplete = true;
                         existing.LastModifiedAt = DateTime.Now;
+
+                        //Päivitetään samalla work-assignmentin tilatietoja
+                        assignment.InProgress = false;
+                        assignment.Completed = true;
+                        assignment.CompletedAt = DateTime.Now;
+                        assignment.LastModifiedAt = DateTime.Now;
                     }
                     else
                     {
